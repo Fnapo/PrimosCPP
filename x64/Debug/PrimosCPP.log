@@ -1,7 +1,11 @@
-﻿  Acciones.cpp
+﻿  AccionesCPP.cpp
+  main.cpp
+C:\x-cpp\PrimosCPP\main.cpp(14): fatal error C1083: No se puede abrir el archivo incluir: 'Acciones.hpp': No such file or directory
   PrimosCPP.cpp
   Prompt.cpp
-  main.cpp
+C:\x-cpp\PrimosCPP\Prompt.cpp(128): warning C4267: 'inicializando': conversión de 'size_t' a 'int'; posible pérdida de datos
+C:\x-cpp\PrimosCPP\Prompt.cpp(163): warning C4267: 'inicializando': conversión de 'size_t' a 'int'; posible pérdida de datos
+C:\x-cpp\PrimosCPP\Prompt.cpp(234): warning C4267: 'return': conversión de 'size_t' a 'int'; posible pérdida de datos
+  WConsola.cpp
+C:\x-cpp\PrimosCPP\WConsola.cpp(38): warning C4267: '=': conversión de 'size_t' a 'int'; posible pérdida de datos
   Generando código...
-  Macros.c
-  PrimosCPP.vcxproj -> C:\x-cpp\PrimosCPP\x64\Debug\PrimosCPP.exe

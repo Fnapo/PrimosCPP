@@ -19,20 +19,20 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="fuentes\Acciones.cpp" />
-    <ClCompile Include="fuentes\Macros.c" />
-    <ClCompile Include="fuentes\PrimosCPP.cpp" />
-    <ClCompile Include="fuentes\Prompt.cpp" />
-    <ClCompile Include="fuentes\WConsola.cpp" />
+    <ClCompile Include="AccionesCPP.cpp" />
+    <ClCompile Include="Lector.c" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PrimosCPP.cpp" />
+    <ClCompile Include="Prompt.cpp" />
+    <ClCompile Include="WConsola.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="headers\Acciones.hpp" />
-    <ClInclude Include="headers\Macros.h" />
-    <ClInclude Include="headers\Macros.hpp" />
-    <ClInclude Include="headers\PrimosCPP.hpp" />
-    <ClInclude Include="headers\Prompt.hpp" />
-    <ClInclude Include="headers\WConsola.hpp" />
+    <ClInclude Include="AccionesCPP.hpp" />
+    <ClInclude Include="Lector.h" />
+    <ClInclude Include="Macros.hpp" />
+    <ClInclude Include="PrimosCPP.hpp" />
+    <ClInclude Include="Prompt.hpp" />
+    <ClInclude Include="WConsola.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
