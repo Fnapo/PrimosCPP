@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Archivos de origen">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Archivos de encabezado">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Archivos de recursos">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Archivos de encabezado\headers">
+      <UniqueIdentifier>{fd95f1f8-2301-4180-9bef-e3a374bd6a1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\fuentes">
+      <UniqueIdentifier>{2b80e84b-45ca-4fe2-a4db-e667e1d93a01}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="fuentes\Acciones.cpp">
+      <Filter>Archivos de origen\fuentes</Filter>
+    </ClCompile>
+    <ClCompile Include="fuentes\Macros.c">
+      <Filter>Archivos de origen\fuentes</Filter>
+    </ClCompile>
+    <ClCompile Include="fuentes\PrimosCPP.cpp">
+      <Filter>Archivos de origen\fuentes</Filter>
+    </ClCompile>
+    <ClCompile Include="fuentes\Prompt.cpp">
+      <Filter>Archivos de origen\fuentes</Filter>
+    </ClCompile>
+    <ClCompile Include="fuentes\WConsola.cpp">
+      <Filter>Archivos de origen\fuentes</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="headers\Acciones.hpp">
+      <Filter>Archivos de encabezado\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\Macros.h">
+      <Filter>Archivos de encabezado\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\PrimosCPP.hpp">
+      <Filter>Archivos de encabezado\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\Prompt.hpp">
+      <Filter>Archivos de encabezado\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\Macros.hpp">
+      <Filter>Archivos de encabezado\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\WConsola.hpp">
+      <Filter>Archivos de encabezado\headers</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
