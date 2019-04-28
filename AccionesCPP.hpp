@@ -31,8 +31,6 @@ private:
 	 *
 	 * Calcula el factor de un numero.
 	 *
-	 * @param primosCPP primo
-	 *
 	 */
 	static void accionCalcularFactor();
 
@@ -41,8 +39,6 @@ private:
 	 * Acción de buscar el primorial a partir del cual el
 	 * factor es mayor que un double (Entre 0.3 y 1).
 	 *
-	 * @param primosCPP primo
-	 *
 	 */
 	static void accionPrimerPrimorial();
 
@@ -50,10 +46,25 @@ private:
 	 *
 	 * Calcula el factor de 2 primos.
 	 *
-	 * @param primosCPP primo
-	 *
 	 */
 	static void accionFactorDoble();
+
+	/*
+	*
+	* Forma automática de doble.
+	* @param double factor (multiplica a la raíz).
+	*
+	*/
+	static void accionAutomaticaDoble(double factor = 1);
+
+	/**
+	* Muestra el resultado de dos números.
+	*
+	* @param int numero
+	* @param int numero2
+	*
+	*/
+	static void verResultadoDoble(int numero, int numero2);
 
 	/**
 		Presenta un aviso.
