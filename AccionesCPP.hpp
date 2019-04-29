@@ -1,8 +1,6 @@
 
 #pragma once
 
-#include "PrimosCPP.hpp"
-
 #define MIN_FACTOR 0.3
 #define MAX_FACTOR 1.0
 
@@ -15,8 +13,6 @@ public:
 	static void inicio();
 
 private:
-	static primosCPP primo;
-
 	AccionesCPP();
 	virtual ~AccionesCPP();
 
@@ -52,19 +48,21 @@ private:
 	/*
 	*
 	* Forma automática de doble.
-	* @param double factor (multiplica a la raíz).
+	*
+	* @param double aumento (multiplica a la raíz).
 	*
 	*/
-	static void accionAutomaticaDoble(double factor = 1);
+	static void accionAutomaticaDoble(double aumento = 1);
 
 	/**
+	*
 	* Muestra el resultado de dos números.
 	*
 	* @param int numero
 	* @param int numero2
 	*
 	*/
-	static void verResultadoDoble(int numero, int numero2);
+	static void verResultadoDoble(int numero, int numero2, double valor, char* cadena);
 
 	/**
 		Presenta un aviso.

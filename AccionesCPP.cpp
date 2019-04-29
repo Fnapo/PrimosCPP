@@ -6,10 +6,9 @@
 #include "Macros.hpp"
 #include "Prompt.hpp"
 #include "WConsola.hpp"
+#include "PrimosCPP.hpp"
 
 using namespace std;
-
-primosCPP AccionesCPP::primo;
 
 AccionesCPP::AccionesCPP() {
 }
@@ -24,11 +23,11 @@ void AccionesCPP::inicio() {
 	WConsola::enlazarConsola();
 	cout << "Espera unos minutos ..." << endl;
 	if (exterior) {
-		primo.leerFicheroNoFormateado();
+		PrimosCPP::leerFicheroNoFormateado();
 	} else {
-		primo.leerFicheroFormateado();
+		PrimosCPP::leerFicheroFormateado();
 	}
-	cout << primo[122] << endl;
+	cout << PrimosCPP::verPrimo(122) << endl;
 	while (1) {
 		cout << "Prompt> ";
 		cin >> comando;
@@ -43,8 +42,7 @@ void AccionesCPP::inicio() {
 			accionFactorDoble();
 		} else if ("auto" == primero) {
 			accionAutomaticaDoble();
-		}
-		else if ("aumentado" == primero) {
+		} else if ("aumentado" == primero) {
 			accionAutomaticaDoble(1.25);
 		} else if (primero == "primer") {
 			accionPrimerPrimorial();
@@ -61,6 +59,7 @@ void AccionesCPP::inicio() {
 
 void AccionesCPP::verAviso() {
 	string noValida = "Entrada no válida ...\n\n";
+	WConsola::alarma();
 
 	cout << noValida;
 }
@@ -78,81 +77,78 @@ void AccionesCPP::accionAyuda() {
 void AccionesCPP::accionFactorDoble() {
 	int numero, numero2, error, min = 2;
 	char cadena[101];
-
-	cout << "Escribe dos primos ... " << endl;
-	snprintf(cadena, 101, "Primer primo (Entre %i y %i): ", min, primo.maximoPrimo());
-	cout << cadena;
-	error = !leerInt(&numero);
-	if (error || numero < min || numero > primo.maximoPrimo()) {
-		verAviso();
-
-		return;
-	}
-	snprintf(cadena, 101, "Segundo primo (Entre %i y %i): ", min, primo.maximoPrimo());
-	cout << cadena;
-	error = !leerInt(&numero2);
-	if (error || numero2 < min || numero2 > primo.maximoPrimo()) {
-		verAviso();
-
-		return;
-	}
-	numero = primo[primo.indicePrimo(numero)];
-	numero2 = primo[primo.indicePrimo(numero2)];
-	verResultadoDoble(numero, numero2);
-}
-
-void AccionesCPP::accionAutomaticaDoble(double factor) {
-	int numero, numero2, error, min = 5;
-	char cadena[101];
-
-	cout << "Se usa dos primos ... " << endl;
-	snprintf(cadena, 101, "Primer primo (Entre %i y %i): ", min, primo.maximoPrimo());
-	cout << cadena;
-	error = !leerInt(&numero);
-	if (error || numero < min || numero > primo.maximoPrimo()) {
-		verAviso();
-
-		return;
-	}
-	numero = primo[primo.indicePrimo(numero)];
-	numero2 = (int)(factor * sqrt(numero));
-	numero2 = primo[primo.indicePrimo(numero2)];
-	snprintf(cadena, 101, "El segundo será: %i.\n", numero2);
-	cout << cadena;
-	verResultadoDoble(numero, numero2);
-}
-
-void AccionesCPP::verResultadoDoble(int numero, int numero2) {
-	char cadena[101];
-	int maximo = maxT(numero, numero2);
 	double valor;
 
-	valor = numero * primo.hallarFactor(numero) + numero2 * primo.hallarFactor(numero2);
-	snprintf(cadena, 101, "El factor para %i y %i es %g (%.2lf)\n\n", numero, numero2, valor / maximo, valor);
+	cout << "Escribe dos primos ... " << endl;
+	snprintf(cadena, 101, "Primer primo (Entre %i y %i): ", min, PrimosCPP::maximoPrimo());
+	cout << cadena;
+	error = !leerInt(&numero);
+	if (error || numero < min || numero > PrimosCPP::maximoPrimo()) {
+		verAviso();
+
+		return;
+	}
+	snprintf(cadena, 101, "Segundo primo (Entre %i y %i): ", min, PrimosCPP::maximoPrimo());
+	cout << cadena;
+	error = !leerInt(&numero2);
+	if (error || numero2 < min || numero2 > PrimosCPP::maximoPrimo()) {
+		verAviso();
+
+		return;
+	}
+	valor = PrimosCPP::logPrimorial(numero);
+	valor += PrimosCPP::logPrimorial(numero2);
+	verResultadoDoble(numero, numero2, valor, cadena);
+}
+
+void AccionesCPP::accionAutomaticaDoble(double aumento) {
+	int numero, numero2, error, min = 5;
+	char cadena[101];
+	double valor;
+
+	cout << "Se usa dos primos ... " << endl;
+	snprintf(cadena, 101, "Primer primo (Entre %i y %i): ", min, PrimosCPP::maximoPrimo());
+	cout << cadena;
+	error = !leerInt(&numero);
+	if (error || numero < min || numero > PrimosCPP::maximoPrimo()) {
+		verAviso();
+
+		return;
+	}
+	valor = PrimosCPP::logPrimorial(numero);	// Modifica numero.
+	numero2 = (int)(aumento * sqrt(numero));
+	valor += PrimosCPP::logPrimorial(numero2);
+	snprintf(cadena, 101, "El segundo será: %i.\n", numero2);
+	cout << cadena;
+	verResultadoDoble(numero, numero2, valor, cadena);
+}
+
+void AccionesCPP::verResultadoDoble(int numero, int numero2, double valor, char* cadena) {
+	snprintf(cadena, 101, "El factor para %i y %i es %g (%.2lf)\n\n", numero, numero2,
+		valor / maxT(numero, numero2), valor);
 	cout << cadena;
 }
 
 void AccionesCPP::accionCalcularFactor() {
 	int numero, error, min = 2;
-	double factor;
+	double logPrimo;
 	char cadena[101];
 
-	snprintf(cadena, 101, "Escribe un primo (Entre %i y %i): ", min, primo.maximoPrimo());
+	snprintf(cadena, 101, "Escribe un primo (Entre %i y %i): ", min, PrimosCPP::maximoPrimo());
 	cout << cadena;
 	error = !leerInt(&numero);
-	if (error || numero < min || numero > primo.maximoPrimo()) {
+	if (error || numero < min || numero > PrimosCPP::maximoPrimo()) {
 		verAviso();
 
 		return;
 	}
-	numero = primo[primo.indicePrimo(numero)];
-	factor = primo.hallarFactor(numero);
-	snprintf(cadena, 101, "El factor para %i es %g (%.2f)\n\n", numero, factor, factor * numero);
+	logPrimo = PrimosCPP::logPrimorial(numero);	// Modifica numero.
+	snprintf(cadena, 101, "El factor para %i es %g (%.2f)\n\n", numero, logPrimo / numero, logPrimo);
 	cout << cadena;
 }
 
 void AccionesCPP::accionPrimerPrimorial() {
-	double por100, factor;
+	double por100, logPrimo;
 	int numero, error;
 	char cadena[101];
 
@@ -164,10 +160,10 @@ void AccionesCPP::accionPrimerPrimorial() {
 
 		return;
 	}
-	if (primo.buscarPrimerPrimorial(por100, numero)) {
-		factor = primo.hallarFactor(numero);
-		snprintf(cadena, 101, "El primo con el factor %g (%g) es: %i (%.2f).\n\n", por100, factor,
-			numero, factor * numero);
+	if (PrimosCPP::buscarPrimerPrimo(por100, numero)) {
+		logPrimo = PrimosCPP::logPrimorial(numero);
+		snprintf(cadena, 101, "El primo con el factor %g (%g) es: %i (%.2f).\n\n", por100, logPrimo / numero,
+			numero, logPrimo);
 		cout << cadena;
 	} else {
 		snprintf(cadena, 101, "Primo no hallado con el factor %g.\n\n", por100);

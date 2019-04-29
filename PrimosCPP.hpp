@@ -14,77 +14,53 @@
 #ifndef PRIMOSCPP_HPP
 #define PRIMOSCPP_HPP
 
+  /*
+	  Clase static de los números primos.
+  */
+
 #define MAX_PRIMOS 600000
 #define COLUMNAS_PRIMOS 4
 #define PRIMOS_FICHERO "primos.txt"
 #define PRIMES_FILE "primes1.txt"
 
-typedef struct {
-	int primo;
-	double logPrimorial;
-} PRIMOLOG;
-
-class primosCPP { // Sólo existirá una instancia de esta clase.
+class PrimosCPP {
 public:
-	primosCPP();
-	virtual ~primosCPP();
-
 	/**
 	 *
 	 * Lee los números primos de un fichero preparado.
 	 *
 	 */
-	void leerFicheroFormateado();
-	/**
-	 *
-	 * Lee de un fichero externo los números primos.
-	 *
-	 */
-	void leerFicheroNoFormateado();
+	static void leerFicheroFormateado();
 
 	/**
-	 * Busca el primorial a partir del cual el
+	 *
+	 *	Lee de un fichero externo los números primos.
+	 *
+	 */
+	static void leerFicheroNoFormateado();
+
+	/**
+	 *
+	 * Busca el primo a partir del cual el
 	 * factor es mayor que pedido (Entre MIN_FACTOR y MAX_FACTOR).
 	 * Devuelve 1 si lo encuentra.
 	 *
 	 * @param double pedido
-	 * @param int primo
-	 * @param double delPrimo
+	 * @param int &primo
 	 * @return int
+	 *
 	 */
-	int buscarPrimerPrimorial(double pedido, int& primo);
+	static int buscarPrimerPrimo(double pedido, int& primo);
 
 	/**
 	 *
 	 * Calcula el ln(primorial).
 	 *
-	 * @param int primo
+	 * @param int &primo
 	 * @return double
 	 *
 	 */
-	double logPrimorial(int primo);
-
-	/**
-	 *
-	 * Calcula el cociente ln(primorial)/primo.
-	 *
-	 * @param int primo
-	 * @return double
-	 *
-	 */
-	double hallarFactor(int primo);
-
-	/**
-	 *
-	 * Halla el indice, por defecto,
-	 * dentro de los primos del número primo.
-	 * Devuelve -1 si primo \<= 1.
-	 *
-	 * @param int primo
-	 * @return int
-	 *
-	 */
-	int indicePrimo(int primo);
+	static double logPrimorial(int& primo);
 
 	/**
 	 *
@@ -93,38 +69,46 @@ public:
 	 * @return int
 	 *
 	 */
-	inline int maximoPrimo() {
+	static inline int maximoPrimo() {
 		return primos[cuantosPrimos - 1];
 	}
 
-	const int operator[](int indice) const;
+	/*
+
+		Muestra el primo en la posición indice
+
+		@return int
+
+	*/
+	static int verPrimo(int indice);
 
 private:
+	PrimosCPP();
+	virtual ~PrimosCPP();
+
 	static int primos[MAX_PRIMOS];
 	static int cuantosPrimos;
-	static double maxFactor;
-	static int cuantosPCPP;
 
 	/**
 	 *
 	 * Inicializa a cero los elementos de primos.
 	 *
 	 */
-	void inicializar();
+	static void inicializar();
 
 	/**
 	 *
 	 * Encuentra los primeros números primos. Hasta el 11.
 	 *
 	 */
-	void primerosPrimos();
+	static void primerosPrimos();
 
 	/**
 	 *
 	 * Guarda los números primos en un fichero.
 	 *
 	 */
-	void guardarEnFichero();
+	static void guardarEnFichero();
 };
 
 #endif /* PRIMOSCPP_HPP */
