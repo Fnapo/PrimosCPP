@@ -55,12 +55,13 @@ public:
 	/**
 	 *
 	 * Calcula el ln(primorial).
+	 * Devuelve 0 si está fuera del rango.
 	 *
-	 * @param int &primo
+	 * @param int &numero
 	 * @return double
 	 *
 	 */
-	static double logPrimorial(int& primo);
+	static double logPrimorial(int& numero);
 
 	/**
 	 *
@@ -81,6 +82,18 @@ public:
 
 	*/
 	static int verPrimo(int indice);
+
+	/*
+
+		Muestra la posición de numero (por defecto)
+		dentro de los números primos.
+		Devuelve -1 si está fuera del rango.
+
+		@param int numero
+		@return int
+
+	*/
+	static int indice(int numero);
 
 private:
 	PrimosCPP();

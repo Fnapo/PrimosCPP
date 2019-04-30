@@ -64,6 +64,13 @@ private:
 	*/
 	static void verResultadoDoble(int numero, int numero2, double valor, char* cadena);
 
+	/*
+
+		Calcula la diferencia media de una serie de primos.
+
+	*/
+	static void accionGap();
+
 	/**
 		Presenta un aviso.
 	*/

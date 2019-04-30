@@ -45,17 +45,21 @@ void PrimosCPP::primerosPrimos() {
 	primos[cuantosPrimos++] = 11;
 }
 
-double PrimosCPP::logPrimorial(int& primo) {
-	int anteriores, aux = primo; //donde = indicePrimo(primo);
+double PrimosCPP::logPrimorial(int& numero) {
+	int anteriores, aux = numero;
 	double salida = 0;
 
-	primo = 1;
-	for (anteriores = 0; anteriores < cuantosPrimos - 1; ++anteriores) {
+	if (!estaEntre(numero, 2, maximoPrimo())) {
+		return 0;
+	}
+
+	numero = 1;
+	for (anteriores = 0; anteriores < cuantosPrimos; ++anteriores) {
 		if (primos[anteriores] > aux) {
 			break;
 		}
-		primo = primos[anteriores];
-		salida += log(primo);
+		numero = primos[anteriores];
+		salida += log(numero);
 	}
 
 	return salida;
@@ -67,7 +71,7 @@ int PrimosCPP::buscarPrimerPrimo(double pedido, int& primo) {
 	double valor = 0;
 
 	primo = 0;
-	for (indice = 0; indice < cuantosPrimos - 1; ++indice) {
+	for (indice = 0; indice < cuantosPrimos; ++indice) {
 		valor += log(primos[indice]);
 		if (valor >= primos[indice] * pedido) {
 			if (salida == 0) {
@@ -150,4 +154,19 @@ int PrimosCPP::verPrimo(int indice) {
 	ajustaEntre(indice, 0, cuantosPrimos - 1);
 
 	return primos[indice];
+}
+
+int PrimosCPP::indice(int numero) {
+	int salida;
+
+	if (!estaEntre(numero, 2, maximoPrimo())) {
+		return -1;
+	}
+	for (salida = 0; salida < cuantosPrimos; ++salida) {
+		if (primos[salida] > numero) {
+			return salida - 1;
+		}
+	}
+
+	return cuantosPrimos - 1;
 }
