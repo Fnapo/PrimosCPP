@@ -23,6 +23,17 @@ private:
 	 */
 	static void accionAyuda();
 
+	/*
+
+		Lee un primo entre dos valores.
+		@param int &primo entero a leer.
+		@param int min valor mínimo posible.
+		@param int max valor máximo posible.
+		@return true si no hay un error, false en caso contrario.
+
+	*/
+	static bool lecturaPrimo(int& primo, int min, int max);
+
 	/**
 	 *
 	 * Calcula el factor de un numero.
@@ -62,14 +73,14 @@ private:
 	* @param int numero2
 	*
 	*/
-	static void verResultadoDoble(int numero, int numero2, double valor, char* cadena);
+	static void verResultadoDoble(int numero, int numero2, double valor);
 
 	/*
 
 		Calcula la diferencia media de una serie de primos.
 
 	*/
-	static void accionGap();
+	static void accionGap(bool total = false);
 
 	/**
 		Presenta un aviso.

@@ -46,6 +46,8 @@ void AccionesCPP::inicio() {
 			accionAutomaticaDoble(1.25);
 		} else if (primero == "gap") {
 			accionGap();
+		} else if ("total" == primero) {
+			accionGap(true);
 		} else if (primero == "primer") {
 			accionPrimerPrimorial();
 		} else if (primero == "quit" || primero == "salir") {
@@ -73,49 +75,51 @@ void AccionesCPP::accionAyuda() {
 	cout << "auto : Forma automática de doble.\n";
 	cout << "aumentado : Forma aumentada de auto.\n";
 	cout << "gap : Calcula la diferencia media de una serie de primos.\n";
+	cout << "total : Semejante a gap, pero con todos los primos anteriores.\n";
 	cout << "primer : Halla un primo con factor mayor que un decimal.\n";
 	cout << "quit | salir : Sale del programa.\n\n";
 }
 
-void AccionesCPP::accionFactorDoble() {
-	int numero, numero2, error, min = 2;
+bool AccionesCPP::lecturaPrimo(int& numero, int min, int max) {
+	int error;
 	char cadena[101];
-	double valor;
 
-	cout << "Escribe dos primos ... " << endl;
-	snprintf(cadena, 101, "Primer primo (Entre %i y %i): ", min, PrimosCPP::maximoPrimo());
+	snprintf(cadena, 101, "Escribe un número (Entre %i y %i): ", min, max);
 	cout << cadena;
 	error = !leerInt(&numero);
 	if (error || !estaEntre(numero, min, PrimosCPP::maximoPrimo())) {
 		verAviso();
 
+		return false;
+	}
+
+	return true;
+}
+
+void AccionesCPP::accionFactorDoble() {
+	int numero, numero2, min = 2;
+	double valor;
+
+	cout << "Escribe dos números. El primer número será ..." << endl;
+	if (!lecturaPrimo(numero, min, PrimosCPP::maximoPrimo())) {
 		return;
 	}
-	snprintf(cadena, 101, "Segundo primo (Entre %i y %i): ", min, PrimosCPP::maximoPrimo());
-	cout << cadena;
-	error = !leerInt(&numero2);
-	if (error || !estaEntre(numero2, min, PrimosCPP::maximoPrimo())) {
-		verAviso();
-
+	cout << "El segundo número será ..." << endl;
+	if (!lecturaPrimo(numero2, min, PrimosCPP::maximoPrimo())) {
 		return;
 	}
 	valor = PrimosCPP::logPrimorial(numero);
 	valor += PrimosCPP::logPrimorial(numero2);
-	verResultadoDoble(numero, numero2, valor, cadena);
+	verResultadoDoble(numero, numero2, valor);
 }
 
 void AccionesCPP::accionAutomaticaDoble(double aumento) {
-	int numero, numero2, error, min = 5;
+	int numero, numero2, min = 5;
 	char cadena[101];
 	double valor;
 
-	cout << "Se usa dos primos ... " << endl;
-	snprintf(cadena, 101, "Primer primo (Entre %i y %i): ", min, PrimosCPP::maximoPrimo());
-	cout << cadena;
-	error = !leerInt(&numero);
-	if (error || !estaEntre(numero, min, PrimosCPP::maximoPrimo())) {
-		verAviso();
-
+	cout << "Se usan dos números. El primer número será ..." << endl;
+	if (!lecturaPrimo(numero, min, PrimosCPP::maximoPrimo())) {
 		return;
 	}
 	valor = PrimosCPP::logPrimorial(numero);	// Modifica numero.
@@ -123,50 +127,42 @@ void AccionesCPP::accionAutomaticaDoble(double aumento) {
 	valor += PrimosCPP::logPrimorial(numero2);
 	snprintf(cadena, 101, "El segundo será: %i.\n", numero2);
 	cout << cadena;
-	verResultadoDoble(numero, numero2, valor, cadena);
+	verResultadoDoble(numero, numero2, valor);
 }
 
-void AccionesCPP::verResultadoDoble(int numero, int numero2, double valor, char* cadena) {
+void AccionesCPP::verResultadoDoble(int numero, int numero2, double valor) {
+	char cadena[101];
+
 	snprintf(cadena, 101, "El factor para %i y %i es %g (%.2lf)\n\n", numero, numero2,
 		valor / maxT(numero, numero2), valor);
 	cout << cadena;
 }
 
 void AccionesCPP::accionCalcularFactor() {
-	int numero, error, min = 2;
-	double logPrimo;
+	int numero, min = 2;
 	char cadena[101];
+	double logPrimo;
 
-	snprintf(cadena, 101, "Escribe un primo (Entre %i y %i): ", min, PrimosCPP::maximoPrimo());
-	cout << cadena;
-	error = !leerInt(&numero);
-	if (error || !estaEntre(numero, min, PrimosCPP::maximoPrimo())) {
-		verAviso();
-
+	if (!lecturaPrimo(numero, min, PrimosCPP::maximoPrimo())) {
 		return;
 	}
 	logPrimo = PrimosCPP::logPrimorial(numero);	// Modifica numero.
-	snprintf(cadena, 101, "El factor para %i es %g (%.2f)\n\n", numero, logPrimo / numero, logPrimo);
+	snprintf(cadena, 101, "El factor para el primo %i es %g (%.2f)\n\n", numero, logPrimo / numero, logPrimo);
 	cout << cadena;
 }
 
-void AccionesCPP::accionGap() {
+void AccionesCPP::accionGap(bool total) {
 	double media;
-	int numero, cuantos, error, min = 101, donde;
+	int numero, cuantos, min = 101, donde;
 	char cadena[101];
 
-	snprintf(cadena, 101, "Escribe un primo (Entre %i y %i): ", min, PrimosCPP::maximoPrimo());
-	cout << cadena;
-	error = !leerInt(&numero);
-	if (error || !estaEntre(numero, min, PrimosCPP::maximoPrimo())) {
-		verAviso();
-
+	if (!lecturaPrimo(numero, min, PrimosCPP::maximoPrimo())) {
 		return;
 	}
 	donde = PrimosCPP::indice(numero);
-	cuantos = (int)(log(PrimosCPP::verPrimo(donde)));	// Número de diferencias de primos.
+	cuantos = (total ? donde : (int)(log(PrimosCPP::verPrimo(donde))));	// Número de diferencias de números.
 	media = (PrimosCPP::verPrimo(donde) - (double)PrimosCPP::verPrimo(donde - cuantos)) / cuantos;
-	snprintf(cadena, 101, "La diferencia media con el primo %i es: %.3f (%.3f).\n\n",
+	snprintf(cadena, 101, "La diferencia media %s con el primo %i es: %.3f (%.3f).\n\n", total ? "total" : "",
 		PrimosCPP::verPrimo(donde), media, log(PrimosCPP::verPrimo(donde)));
 	cout << cadena;
 }
